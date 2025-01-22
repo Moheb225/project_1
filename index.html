@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style/login.css">
+
+    <link rel="stylesheet" href="../style/login.css">
+    <title>Coffee | Shop</title>
+</head>
+
+<body>
+
+    <div class="main">
+        <input type="checkbox" id="chk" aria-hidden="true">
+
+        <div class="signup">
+            <form>
+                <label for="chk" aria-hidden="true">Sign up</label>
+                <input type="text" name="txt" id="userName" placeholder="User Name" required="">
+                <input type="email" name="email" id="email" placeholder="Email" required="">
+                <input type="password" id="password" name="pswd" placeholder="Password" required="">
+                <input type="password" name="pswd" id="confirmPassword" class="input-field"
+                    placeholder="Confirm password" required>
+                <button type="button" onclick="registerUser()">Sign up</button>
+            </form>
+        </div>
+
+        <div class=" login">
+            <form>
+                <label for="chk" aria-hidden="true">Login</label>
+                <input type="email" name="email" placeholder="Email" required="" id="loginEmail">
+                <input type="password" name="pswd" placeholder="Password" required="" id="loginPassword">
+                <button type="button" onclick="loginUser()">Login</button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+
+        function loginUser() {
+            const email = document.getElementById('loginEmail').value;
+            const password = document.getElementById('loginPassword').value;
+            const users = JSON.parse(localStorage.getItem('users')) || [];
+
+            const user = users.find(user => user.email === email && user.password === password);
+            if (user) {
+                alert('Login successful!');
+                localStorage.setItem('isLoggedIn', true); // Set isLoggedIn to true on successful login
+                window.location.href = './appointment.html'; // Redirect to Landing Page
+            } else {
+                alert('Invalid email or password.');
+            }
+        }
+        function registerUser() {
+            const userName = document.getElementById('userName').value;
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+            const confirmPassword = document.getElementById('confirmPassword').value;
+
+            if (password !== confirmPassword) {
+                alert('Passwords do not match.');
+                return;
+            }
+
+            let users = JSON.parse(localStorage.getItem('users')) || [];
+            if (users.some(user => user.email === email)) {
+                alert('Email already registered.');
+                return;
+            }
+
+            users.push({ email, password, userName });
+            localStorage.setItem('users', JSON.stringify(users));
+            alert('Registration successful!');
+
+        }
+    </script>
+</body>
+
+</html>

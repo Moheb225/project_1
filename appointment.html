@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style/appointment.css">
+  <link rel="stylesheet" href="../style/style.css">
+  <title>Coffee | Shop</title>
+</head>
+
+<body>
+
+  <div class="appointment-form-container">
+    <h2>Make a Reservation</h2>
+    <form id="appointmentForm">
+      <label for="name">Name:</label>
+      <input type="text" id="name" name="name" required>
+
+      <label for="email">Email:</label>
+      <input type="email" id="email" name="email" required>
+
+      <label for="date">Date:</label>
+      <input type="date" id="date" name="date" required>
+
+      <label for="details">Details:</label>
+      <textarea id="details" name="details" rows="4" placeholder="Any specific details or requirements"></textarea>
+
+      <button type="button" onclick="submitHandler()">Reserve</button>
+    </form>
+  </div>
+  <script>
+    window.onload = function () {
+      // Check if the user is logged in
+      const isLoggedIn = localStorage.getItem('isLoggedIn'); // Set this item on successful login
+      if (!isLoggedIn) {
+        alert('You must be logged in to make an appointment.');
+        window.location.href = './login.html'; // Redirect to the login page
+      }
+    };
+    function submitHandler() {
+      window.location.href = './home.html';
+    }
+  </script>
+
+</body>
+
+</html>
